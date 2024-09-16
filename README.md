@@ -9,27 +9,27 @@ Welcome to npm-cli-slack-message-deleter
 ## Usage 🛠️
 
 Here's how you can use npm-cli-slack-message-deleter:
-TODO: copy output of `npx npm-cli-slack-message-deleter --help`
+TODO: copy output of `npx -y slack-message-deleter --help`
 
 ```
-Usage: Replace all words [options] <targetDirectoryPath> <beforeWord> <afterWord>
+Usage: slack-message-deleter [options]
 
-Arguments:
-  targetDirectoryPath  Path to the target directory where replacements are to be made
-  beforeWord           Word to be replaced throughout the target directory
-  afterWord            Word to replace the beforeWord with
+Clean up old messages in slack channel
 
 Options:
-
+  -t, --token <string>    SlackBotToken
+  -c, --channel <string>  ChannelId
+  -m, --minutes <number>  DeleteMessagesOlderThanThisNumberOfMinutes
+  -h, --help              display help for command
 ```
 
 ## Example 📖
 
 Here's a quick example to illustrate its usage:
-TODO:
+Remove messages older than 10 minutes in the channel `CFNN90G07`
 
 ```
-npx npm-cli-slack-message-deleter
+npx -y slack-message-deleter -t xoxb-123456789012-123456789012-123456789012-123456789012 -c CFNN90G07 -m 10
 ```
 
 ## Contributing

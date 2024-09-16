@@ -28,14 +28,28 @@ Options:
     }
     const channel = process.env.SLACK_CHANNEL_ID || 'CFNN90G07';
     const minutes = 1;
-    await postMessage(token, channel, 'test');
+    await postMessage(token, channel, 'should be deleted');
     await new Promise((resolve) => setTimeout(resolve, 60000));
+    await postMessage(token, channel, 'should be not deleted');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const output = execSync(
       `npx ts-node ./src/adapter/entry-points/cli/index.ts -t ${token} -c ${channel} -m ${minutes}`,
     ).toString();
 
     expect(output.trim().startsWith('Deleted ')).toEqual(true);
+    const web = new WebClient(token);
+    const resultMessages = await web.conversations.history({
+      channel,
+      limit: 1000,
+    });
+    if (
+      !('messages' in resultMessages) ||
+      !Array.isArray(resultMessages.messages)
+    ) {
+      throw new Error('InvalidResponseFromSlackApi');
+    }
+    expect(resultMessages.messages[0].text).toEqual('should be not deleted');
   });
 });
 const postMessage = async (token: string, channel: string, text: string) => {

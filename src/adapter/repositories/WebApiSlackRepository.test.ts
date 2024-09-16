@@ -14,17 +14,32 @@ describe('WebApiSlackRepository', () => {
     const slackRepository = new WebApiSlackRepository(token);
     await slackRepository.joinChannel(channel);
     const web = new WebClient(token);
-    const resultPostMessage = await web.chat.postMessage({
+
+    const resultPostMessageWithThread = await web.chat.postMessage({
       channel,
-      text: 'should be delete text',
+      text: 'should be delete text with thread',
     });
-    if (!resultPostMessage.ok) {
+    await web.chat.postMessage({
+      channel,
+      text: 'should be delete text in thread',
+      thread_ts: resultPostMessageWithThread.ts,
+    });
+    const resultPostMessageWithoutThread = await web.chat.postMessage({
+      channel,
+      text: 'should be delete text without thread',
+    });
+    if (!resultPostMessageWithoutThread.ok) {
       throw new Error('Failed to post message');
     }
 
     const resultMessages = await slackRepository.getMessages(channel);
     expect(resultMessages.messages.length).toBeGreaterThan(0);
-    expect(resultMessages.messages[0].ts).toEqual(resultPostMessage.ts);
+    expect(resultMessages.messages[0].ts).toEqual(
+      resultPostMessageWithoutThread.ts,
+    );
+    expect(resultMessages.messages[1].ts).toEqual(
+      resultPostMessageWithThread.ts,
+    );
     for (const message of resultMessages.messages) {
       await slackRepository.deleteMessage(channel, message.ts);
     }
@@ -32,7 +47,7 @@ describe('WebApiSlackRepository', () => {
       await slackRepository.getMessages(channel);
     expect(
       resultMessagesAfterDelete.messages.filter(
-        (message) => message.ts === resultPostMessage.ts,
+        (message) => message.ts === resultPostMessageWithoutThread.ts,
       ).length,
     ).toEqual(0);
   });

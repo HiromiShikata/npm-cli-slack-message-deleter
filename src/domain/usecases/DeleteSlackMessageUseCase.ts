@@ -34,8 +34,6 @@ export class DeleteOldMessagesUseCase {
         if (messageTimestamp < thresholdTimestamp) {
           await this.slackRepository.deleteMessage(channelId, message.ts);
           deletedCount++;
-        } else {
-          return { deletedCount, joinedChannel };
         }
       }
 

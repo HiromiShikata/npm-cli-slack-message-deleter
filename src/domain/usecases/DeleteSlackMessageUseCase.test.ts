@@ -105,9 +105,9 @@ describe('DeleteOldMessagesUseCase', () => {
 
       const result = await useCase.execute(input);
 
-      expect(result.deletedCount).toBe(2);
+      expect(result.deletedCount).toBe(3);
       expect(result.joinedChannel).toBe(true);
-      expect(mockSlackRepository.deleteMessage).toHaveBeenCalledTimes(2);
+      expect(mockSlackRepository.deleteMessage).toHaveBeenCalledTimes(3);
     });
 
     test('HandlesMultiplePages', async () => {

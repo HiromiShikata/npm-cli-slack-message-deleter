@@ -38,14 +38,51 @@ export class WebApiSlackRepository implements SlackRepository {
         channel: channelId,
         ts: ts,
       });
+
+      await this.deleteThreadReplies(channelId, ts);
     } catch (error) {
-      if (!(error instanceof Error)) {
-        throw new Error(`FailedToDeleteMessage: ${ts}. UnknownError`);
+      if (error instanceof Error) {
+        if (error.message.includes('message_not_found')) {
+          await this.deleteThreadReplies(channelId, ts);
+          return;
+        }
+        throw new Error(
+          `FailedToDeleteMessage: ${ts}. Error: ${error.message}`,
+        );
       }
-      if (error.message.endsWith('cant_delete_message')) {
-        return;
+      throw new Error(`FailedToDeleteMessage: ${ts}. UnknownError`);
+    }
+  }
+
+  private async deleteThreadReplies(
+    channelId: string,
+    threadTs: string,
+  ): Promise<void> {
+    try {
+      const repliesResult = await this.client.conversations.replies({
+        channel: channelId,
+        ts: threadTs,
+      });
+
+      if (
+        'messages' in repliesResult &&
+        Array.isArray(repliesResult.messages) &&
+        repliesResult.messages.length > 1
+      ) {
+        const threadMessages = repliesResult.messages.slice(1);
+        for (const threadMessage of threadMessages) {
+          if ('ts' in threadMessage && typeof threadMessage.ts === 'string') {
+            await this.deleteMessage(channelId, threadMessage.ts);
+          }
+        }
       }
-      throw new Error(`FailedToDeleteMessage: ${ts}. Error: ${error.message}`);
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message.includes('thread_not_found')) {
+          return;
+        }
+      }
+      throw error;
     }
   }
 

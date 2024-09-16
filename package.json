@@ -1,5 +1,5 @@
 {
-  "name": "npm-cli-slack-message-deleter",
+  "name": "slack-message-deleter",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "bin": {
-    "npm-cli-slack-message-deleter": "./bin/adapter/entry-points/cli/index.js"
+    "slack-message-deleter": "./bin/adapter/entry-points/cli/index.js"
   },
   "repository": {
     "type": "git",

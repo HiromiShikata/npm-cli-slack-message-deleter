@@ -32,6 +32,7 @@ To use this tool, you need to set up a Slack app with the appropriate permission
 2. Navigate to "OAuth & Permissions" in the left sidebar.
 
 3. Scroll down to the "Scopes" section and add the following scopes under "User Token Scopes":
+
    - `admin`
    - `channels:history`
    - `channels:write`

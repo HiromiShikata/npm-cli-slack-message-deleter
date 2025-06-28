@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/HiromiShikata/npm-cli-slack-message-deleter/compare/v1.0.13...v1.0.14) (2025-06-28)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([c0af6f7](https://github.com/HiromiShikata/npm-cli-slack-message-deleter/commit/c0af6f79148602269d84a0878a132ba4f94a36b8))
+
 ## [1.0.13](https://github.com/HiromiShikata/npm-cli-slack-message-deleter/compare/v1.0.12...v1.0.13) (2025-06-21)
 
 

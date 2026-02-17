@@ -1,6 +1,9 @@
 name: Auto commit / format
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
 
 jobs:
   format:

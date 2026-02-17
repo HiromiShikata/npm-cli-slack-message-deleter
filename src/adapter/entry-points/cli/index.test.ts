@@ -4,6 +4,8 @@ import { config } from 'dotenv';
 
 config();
 
+const itIfSlackToken = process.env.SLACK_BOT_TOKEN ? it : it.skip;
+
 describe('commander program', () => {
   jest.setTimeout(120000);
   it('should output help contents', () => {
@@ -21,11 +23,8 @@ Options:
   -m, --minutes <number>  DeleteMessagesOlderThanThisNumberOfMinutes
   -h, --help              display help for command`);
   });
-  it('should delete message', async () => {
-    const token = process.env.SLACK_BOT_TOKEN;
-    if (!token) {
-      throw new Error('SLACK_BOT_TOKEN is not set');
-    }
+  itIfSlackToken('should delete message', async () => {
+    const token = process.env.SLACK_BOT_TOKEN || '';
     const channel = process.env.SLACK_CHANNEL_ID || 'CFNN90G07';
     const minutes = 1;
     await postMessage(token, channel, 'should be deleted');

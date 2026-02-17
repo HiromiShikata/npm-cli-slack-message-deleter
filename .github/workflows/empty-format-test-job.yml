@@ -1,6 +1,9 @@
 name: Empty format test
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
 
 jobs:
   test:

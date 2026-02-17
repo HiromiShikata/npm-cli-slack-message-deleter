@@ -4,12 +4,13 @@ import { WebClient } from '@slack/web-api';
 
 config();
 
-describe('WebApiSlackRepository', () => {
+const describeIfSlackToken = process.env.SLACK_BOT_TOKEN
+  ? describe
+  : describe.skip;
+
+describeIfSlackToken('WebApiSlackRepository', () => {
   it('should delete message', async () => {
-    const token = process.env.SLACK_BOT_TOKEN;
-    if (!token) {
-      throw new Error('SLACK_BOT_TOKEN is not set');
-    }
+    const token = process.env.SLACK_BOT_TOKEN || '';
     const channel = process.env.SLACK_CHANNEL_ID || 'CFNN90G07';
     const slackRepository = new WebApiSlackRepository(token);
     await slackRepository.joinChannel(channel);

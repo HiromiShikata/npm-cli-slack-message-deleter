@@ -31,8 +31,12 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Run tests
-        run: npm run test
+      - name: Run unit tests
+        run: npm run test -- --testPathIgnorePatterns='adapter/repositories/WebApiSlackRepository.test.ts|adapter/entry-points/cli/index.test.ts'
+
+      - name: Run integration tests
+        if: github.actor != 'dependabot[bot]'
+        run: npm run test -- --testPathPatterns='adapter/repositories/WebApiSlackRepository.test.ts|adapter/entry-points/cli/index.test.ts'
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: CFNN90G07

@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN || github.token }}
       - uses: actions/setup-node@v6
         with:
           node-version: 20
@@ -24,5 +24,6 @@ jobs:
           npx prettier --write "**/*.{md,yaml,yml,js}" --trailing-comma all --print-width 80 --single-quote true
           git --no-pager diff
       - uses: stefanzweifel/git-auto-commit-action@v7
+        if: github.actor != 'dependabot[bot]'
         with:
           commit_message: 'style: re-format / npx prettier --write "**/*.{md,yaml,yml,js}"'

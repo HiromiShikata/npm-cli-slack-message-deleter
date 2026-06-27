@@ -16,7 +16,7 @@ class DeleteOldMessagesUseCase {
             await this.slackRepository.joinChannel(channelId);
             joinedChannel = true;
         }
-        catch (error) {
+        catch {
             console.error(`FailedToJoinChannel: ${channelId}. ProceedingWithoutJoining.`);
         }
         for (let i = 0; i < maxIteration; i++) {

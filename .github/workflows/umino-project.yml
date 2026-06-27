@@ -288,6 +288,7 @@ jobs:
           egress-policy: audit
       - name: Generate hs-bot-gh-ap installation token
         id: app-token
+        if: github.event.pull_request.user.login != 'dependabot[bot]'
         uses: actions/create-github-app-token@v3
         with:
           client-id: ${{ secrets.HS_BOT_GH_AP_CLIENT_ID }}

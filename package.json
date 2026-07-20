@@ -53,6 +53,7 @@
     "@swc/core": "^1.15.43",
     "@swc/jest": "^0.2.39",
     "eslint-plugin-import-x": "^4.16.2",
+    "tsx": "^4.23.1",
     "jest": "^30.0.0",
     "jest-html-reporter": "^4.0.0",
     "jest-junit": "^17.0.0",

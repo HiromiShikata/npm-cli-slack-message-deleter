@@ -1,6 +1,6 @@
 import { WebClient } from '@slack/web-api';
-import { SlackRepository } from '../../domain/usecases/adapter-interfaces/SlackRepository';
-import { SlackMessage } from '../../domain/entities/SlackMessage';
+import type { SlackRepository } from '../../domain/usecases/adapter-interfaces/SlackRepository';
+import type { SlackMessage } from '../../domain/entities/SlackMessage';
 
 export class WebApiSlackRepository implements SlackRepository {
   private client: WebClient;

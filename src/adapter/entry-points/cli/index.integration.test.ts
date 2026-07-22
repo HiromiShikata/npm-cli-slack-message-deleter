@@ -8,7 +8,7 @@ describe('commander program', () => {
   jest.setTimeout(120000);
   it('should output help contents', () => {
     const output = execSync(
-      'npx ts-node ./src/adapter/entry-points/cli/index.ts -h',
+      'npx tsx ./src/adapter/entry-points/cli/index.ts -h',
     ).toString();
 
     expect(output.trim()).toEqual(`Usage: slack-message-deleter [options]
@@ -34,7 +34,7 @@ Options:
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const output = execSync(
-      `npx ts-node ./src/adapter/entry-points/cli/index.ts -t ${token} -c ${channel} -m ${minutes}`,
+      `npx tsx ./src/adapter/entry-points/cli/index.ts -t ${token} -c ${channel} -m ${minutes}`,
     ).toString();
 
     expect(output.trim().startsWith('Deleted ')).toEqual(true);

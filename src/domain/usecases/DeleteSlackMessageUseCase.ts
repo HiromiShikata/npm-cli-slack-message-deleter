@@ -1,4 +1,4 @@
-import { SlackRepository } from './adapter-interfaces/SlackRepository';
+import type { SlackRepository } from './adapter-interfaces/SlackRepository';
 
 export class DeleteOldMessagesUseCase {
   constructor(readonly slackRepository: SlackRepository) {}

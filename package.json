@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/HiromiShikata/npm-cli-slack-message-deleter#readme",
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@types/jest": "^30.0.0",
     "check-node-version": "^4.2.1",

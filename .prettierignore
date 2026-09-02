@@ -1,10 +1,8 @@
 *.xml
-*.sh
 .gitignore
 .prettierignore
 .gitkeep
-
-
+*.sh
 .idea
 reports
 dist

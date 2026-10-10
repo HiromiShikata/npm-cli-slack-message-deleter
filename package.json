@@ -42,6 +42,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/npm": "^13.0.0",
     "@types/jest": "^30.0.0",
     "check-node-version": "^4.2.1",
     "commitlint": "^21.0.0",
@@ -62,9 +63,11 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "@semantic-release/npm": "^13.0.0",
     "@slack/web-api": "^8.0.0",
     "commander": "^15.0.0",
     "dotenv": "^17.4.2"
+  },
+  "overrides": {
+    "handlebars": "^4.7.10"
   }
 }

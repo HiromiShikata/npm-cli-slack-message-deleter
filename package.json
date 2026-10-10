@@ -66,5 +66,8 @@
     "@slack/web-api": "^8.0.0",
     "commander": "^15.0.0",
     "dotenv": "^17.4.2"
+  },
+  "overrides": {
+    "handlebars": "^4.7.10"
   }
 }

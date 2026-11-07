@@ -5,10 +5,7 @@ import fs from 'fs';
 // the first `node_modules/<name>` directory. Used instead of require.resolve
 // because @actions/http-client is ESM-only and its `exports` map blocks
 // require.resolve under Jest.
-const findNodeModulesPackageDir = (
-  startDir: string,
-  name: string,
-): string => {
+const findNodeModulesPackageDir = (startDir: string, name: string): string => {
   let dir = startDir;
   for (;;) {
     const candidate = path.join(dir, 'node_modules', name);
@@ -34,12 +31,13 @@ const resolveUndiciVersionFrom = (parentPackageName: string): string => {
     path.resolve(__dirname),
     parentPackageName,
   );
-  return readInstalledVersion(
-    findNodeModulesPackageDir(parentDir, 'undici'),
-  );
+  return readInstalledVersion(findNodeModulesPackageDir(parentDir, 'undici'));
 };
 
-const isAtLeast = (installedVersion: string, minimumVersion: string): boolean => {
+const isAtLeast = (
+  installedVersion: string,
+  minimumVersion: string,
+): boolean => {
   const toParts = (version: string): number[] =>
     version.split('.').map((part) => parseInt(part, 10));
   const installed = toParts(installedVersion);

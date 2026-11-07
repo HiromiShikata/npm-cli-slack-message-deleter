@@ -1,10 +1,6 @@
 import path from 'path';
 import fs from 'fs';
 
-// Walks up from `startDir` the way Node does for bare specifiers and returns
-// the first `node_modules/<name>` directory. Used instead of require.resolve
-// because @actions/http-client is ESM-only and its `exports` map blocks
-// require.resolve under Jest.
 const findNodeModulesPackageDir = (startDir: string, name: string): string => {
   let dir = startDir;
   for (;;) {
@@ -24,8 +20,6 @@ const readInstalledVersion = (packageDir: string): string =>
   JSON.parse(fs.readFileSync(path.join(packageDir, 'package.json'), 'utf8'))
     .version;
 
-// The undici copy a parent package sees: its own nested node_modules first,
-// then the hoisted copy at the repository root.
 const resolveUndiciVersionFrom = (parentPackageName: string): string => {
   const parentDir = findNodeModulesPackageDir(
     path.resolve(__dirname),
@@ -42,9 +36,9 @@ const isAtLeast = (
     version.split('.').map((part) => parseInt(part, 10));
   const installed = toParts(installedVersion);
   const minimum = toParts(minimumVersion);
-  for (let i = 0; i < minimum.length; i++) {
-    if (installed[i] !== minimum[i]) {
-      return installed[i] > minimum[i];
+  for (let partIndex = 0; partIndex < minimum.length; partIndex++) {
+    if (installed[partIndex] !== minimum[partIndex]) {
+      return installed[partIndex] > minimum[partIndex];
     }
   }
   return true;

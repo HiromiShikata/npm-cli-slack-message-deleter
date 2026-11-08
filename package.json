@@ -40,20 +40,20 @@
   },
   "homepage": "https://github.com/HiromiShikata/npm-cli-slack-message-deleter#readme",
   "devDependencies": {
-    "@babel/core": "8.0.7",
+    "@babel/core": "8.0.10",
     "@babel/eslint-parser": "8.0.7",
     "@babel/plugin-syntax-typescript": "^8.0.3",
     "@semantic-release/changelog": "^7.0.0",
-    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/npm": "13.2.0",
-    "@swc/core": "1.16.18",
+    "@swc/core": "1.16.21",
     "@swc/jest": "^0.2.39",
     "@types/jest": "^30.0.0",
     "check-node-version": "^4.2.1",
-    "commitlint": "21.2.3",
+    "commitlint": "21.2.4",
     "conventional-changelog-conventionalcommits": "10.4.1",
     "eslint": "10.12.0",
-    "eslint-plugin-import-x": "^4.16.2",
+    "eslint-plugin-import-x": "^4.17.1",
     "jest": "30.5.2",
     "jest-html-reporter": "4.4.2",
     "jest-junit": "^17.0.0",
@@ -63,9 +63,9 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "@slack/web-api": "8.2.0",
+    "@slack/web-api": "8.3.0",
     "commander": "^15.0.0",
-    "dotenv": "18.0.7"
+    "dotenv": "18.0.9"
   },
   "overrides": {
     "handlebars": "^4.7.10"

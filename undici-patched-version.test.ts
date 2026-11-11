@@ -58,4 +58,10 @@ describe('undici patched dependency versions (high Dependabot alerts)', () => {
 
     expect(isAtLeast(installedVersion, '6.29.1')).toBe(true);
   });
+
+  test('undici bundled inside npm is >= 6.29.1', () => {
+    const installedVersion = resolveUndiciVersionFrom('npm');
+
+    expect(isAtLeast(installedVersion, '6.29.1')).toBe(true);
+  });
 });

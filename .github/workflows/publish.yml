@@ -7,8 +7,6 @@ on:
 
 env:
   RELEASE_APP_ID: 795363
-  RELEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
-  PJ_GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   publish:
@@ -21,7 +19,7 @@ jobs:
         id: app-token
         with:
           app-id: ${{ env.RELEASE_APP_ID }}
-          private-key: ${{ env.RELEASE_APP_PRIVATE_KEY }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           token: ${{ steps.app-token.outputs.token }}

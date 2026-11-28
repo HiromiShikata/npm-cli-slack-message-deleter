@@ -8,9 +8,15 @@ on:
 env:
   RELEASE_APP_ID: 795363
 
+permissions:
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
@@ -28,14 +34,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install npm 11.5.1 or later for trusted publishing
+        run: npm install --global npm@^11.5.1
       - run: npm ci
       - run: npm run build
       - run: git config --global user.email "gh-actions"
       - run: git config --global user.name "gh-actions"
 
       - run: npx semantic-release
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: |
           git status
           git add -A
